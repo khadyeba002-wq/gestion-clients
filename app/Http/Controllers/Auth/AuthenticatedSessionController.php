@@ -36,12 +36,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        try {
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        $request->session()->regenerateToken();
+            return redirect('/login')->with('success', 'Vous avez été déconnecté avec succès.');
+        } catch (\Exception $e) {
+            // En cas d'erreur, forcer la déconnexion
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Déconnexion réussie');
+            return redirect('/login')->with('info', 'Déconnexion effectuée.');
+        }
     }
 }
