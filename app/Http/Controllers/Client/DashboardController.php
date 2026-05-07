@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $orders = Order::where('user_id', $user->id);
 
         // ✅ produits pour affichage
-        $products = Product::latest()->take(6)->get();
+        $products = Product::where('is_active', true)->latest()->take(6)->get();
 
         // ✅ panier
         $cartCount = Cart::where('user_id', $user->id)->count();

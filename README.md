@@ -42,6 +42,30 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Redberry](https://redberry.international/laravel-development)**
 - **[Active Logic](https://activelogic.com)**
 
+## Déploiement Railway
+
+Ce projet peut être déployé sur Railway avec `railway.json`.
+
+Variables d'environnement importantes :
+
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+- `APP_URL=https://gestion-clients-app-production.up.railway.app`
+- `DB_CONNECTION=pgsql`
+- `DB_URL` (fourni par le plugin base de données Railway)
+- `SESSION_DRIVER=database`
+- `CACHE_STORE=database`
+- `QUEUE_CONNECTION=database`
+- `FILESYSTEM_DISK=public`
+
+Railway exécutera la commande de démarrage :
+
+```bash
+php artisan storage:link && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+```
+
+Assure-toi d'installer un plugin de base de données Railway et de connecter les variables d'environnement fournies par Railway.
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).

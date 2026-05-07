@@ -11,7 +11,9 @@ class Product extends Model
     'description',
     'price',
     'stock',
-    'image'
+    'image',
+    'is_active',
+    'category_id'
 ];
 
 public function orderItems()
